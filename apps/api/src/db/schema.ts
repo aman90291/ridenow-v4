@@ -5,5 +5,5 @@ export const rides = pgTable('rides', {
   id: uuid('id').primaryKey().defaultRandom(),
   riderPhone: text('rider_phone').notNull(),
   status: text('status').notNull().default('requested'),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 });
