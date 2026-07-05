@@ -1,0 +1,26 @@
+{
+  "name": "ridenow",
+  "version": "0.1.0",
+  "private": true,
+  "description": "RideNow v4 — rider + driver ride-hailing platform (monorepo scaffold)",
+  "workspaces": [
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspace @ridenow/api",
+    "build": "npm run build --workspaces --if-present",
+    "dev:api": "npm run start:dev --workspace @ridenow/api",
+    "smoke": "bash scripts/smoke.sh",
+    "seed": "bash scripts/seed.sh"
+  },
+  "devDependencies": {
+    "eslint": "^9.9.0",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.7.0"
+  }
+}
