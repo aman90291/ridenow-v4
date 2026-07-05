@@ -40,6 +40,11 @@ services:
     build:
       context: .
       dockerfile: apps/rider-web/Dockerfile
+      args:
+        # Next.js inlines NEXT_PUBLIC_* at build time, so the value must be a
+        # build ARG (the Dockerfile needs a matching `ARG NEXT_PUBLIC_API_URL`
+        # exported as ENV before `next build`), not just a runtime env var.
+        NEXT_PUBLIC_API_URL: http://localhost:3000
     environment:
       NEXT_PUBLIC_API_URL: http://localhost:3000
     ports:
@@ -51,6 +56,11 @@ services:
     build:
       context: .
       dockerfile: apps/driver-web/Dockerfile
+      args:
+        # Next.js inlines NEXT_PUBLIC_* at build time, so the value must be a
+        # build ARG (the Dockerfile needs a matching `ARG NEXT_PUBLIC_API_URL`
+        # exported as ENV before `next build`), not just a runtime env var.
+        NEXT_PUBLIC_API_URL: http://localhost:3000
     environment:
       NEXT_PUBLIC_API_URL: http://localhost:3000
     ports:
