@@ -3,7 +3,11 @@
 FROM node:20-alpine AS build
 WORKDIR /app
 COPY . .
-RUN npm install
+# Scoped install: only @ridenow/api (+ workspace root) deps get installed,
+# so rider-web/driver-web's Next.js/React never enter this image. The api's
+# own devDependencies (nest-cli, etc.) are included for the build below and
+# stripped afterward by `npm prune --omit=dev`.
+RUN npm install --workspace @ridenow/api --include-workspace-root
 RUN npm run build --workspace @ridenow/api
 # Strip devDependencies (nest-cli, jest, ts-jest, drizzle-kit) from the installed tree.
 RUN npm prune --omit=dev
